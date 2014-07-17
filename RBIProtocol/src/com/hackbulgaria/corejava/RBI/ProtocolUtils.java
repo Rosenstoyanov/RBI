@@ -17,7 +17,8 @@ public class ProtocolUtils {
         while (!line.contains(EOM)) {
             line = scanner.nextLine();
             result.append(line);
-            result.append(System.lineSeparator());
+            // result.append(System.lineSeparator());
+            result.append("/n");
         }
         return result.toString();
     }
