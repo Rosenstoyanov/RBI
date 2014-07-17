@@ -7,9 +7,9 @@ import java.util.Scanner;
 
 public class ProtocolUtils {
 
-    public final String EOM = "<![End-of-message]!>";
+    public static final String EOM = "<![End-of-message]!>";
 
-    public String readFromSocket(Socket socket) throws IOException {
+    public static String readFromSocket(Socket socket) throws IOException {
 
         StringBuilder result = new StringBuilder();
         Scanner scanner = new Scanner(socket.getInputStream());
@@ -22,7 +22,7 @@ public class ProtocolUtils {
         return result.toString();
     }
 
-    public void writeToSocket(String message, Socket socket) throws IOException {
+    public static void writeToSocket(String message, Socket socket) throws IOException {
         PrintWriter writer = new PrintWriter(socket.getOutputStream());
         writer.println(message);
         writer.println(EOM);
