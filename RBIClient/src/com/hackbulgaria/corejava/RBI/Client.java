@@ -12,15 +12,18 @@ public class Client {
         String hostName = "192.168.1.45";
         int portNumber = 1436;
 
-        try (Socket clientSocket = new Socket(hostName, portNumber);) {
+        try (Socket clientSocket = new Socket();) {
             clientSocket.connect(new InetSocketAddress(hostName, portNumber));
+            @SuppressWarnings("resource")
             Scanner scanner = new Scanner(System.in);
             String message = scanner.nextLine();
             ProtocolUtils.writeToSocket(message, clientSocket);
 
-            while (scanner.hasNextLine()) {
-                System.out.println(ProtocolUtils.readFromSocket(clientSocket));
-            }
+            System.out.println(ProtocolUtils.readFromSocket(clientSocket));
+            // Scanner sc = new Scanner(source);
+            // while (scanner.hasNextLine()) {
+            // System.out.println(ProtocolUtils.readFromSocket(clientSocket));
+            // }
 
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + hostName);
