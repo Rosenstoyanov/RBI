@@ -1,9 +1,10 @@
 package com.hackbulgaria.corejava.RBI;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Server {
 	public static void main(String[] args) throws IOException,
@@ -16,10 +17,10 @@ public class Server {
 		Process process = Runtime.getRuntime().exec(ProtocolUtils.readFromSocket(clientSocket));
 		process.waitFor();
 		@SuppressWarnings("resource")
-		Scanner scaner = new Scanner(process.getInputStream());
+		BufferedReader bufferedReader = new BufferedReader(
+				new InputStreamReader(process.getInputStream()));
 		String line = "";
-		while (scaner.hasNextLine()) {
-			line = scaner.nextLine();
+		while ((line = bufferedReader.readLine()) != null) {
 			builder.append(line);
 			builder.append("/n");
 		}

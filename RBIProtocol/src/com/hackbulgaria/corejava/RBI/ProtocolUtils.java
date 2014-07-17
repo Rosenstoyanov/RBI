@@ -15,8 +15,10 @@ public class ProtocolUtils {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         StringBuilder result = new StringBuilder();
         String line = "";
-        while (!line.equals(EOM)) {
-            line = bufferedReader.readLine();
+		while ((line = bufferedReader.readLine()) != null) {
+			if (line.contains(EOM)) {
+				break;
+			}
             result.append(line).append(System.lineSeparator());
         }
         return result.toString();
