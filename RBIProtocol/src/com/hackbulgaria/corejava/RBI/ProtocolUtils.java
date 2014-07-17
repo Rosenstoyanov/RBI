@@ -1,9 +1,10 @@
 package com.hackbulgaria.corejava.RBI;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class ProtocolUtils {
 
@@ -11,14 +12,12 @@ public class ProtocolUtils {
 
     public static String readFromSocket(Socket socket) throws IOException {
 
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         StringBuilder result = new StringBuilder();
-        Scanner scanner = new Scanner(socket.getInputStream());
         String line = "";
-        while (!line.contains(EOM)) {
-            line = scanner.nextLine();
-            result.append(line);
-            // result.append(System.lineSeparator());
-            result.append("/n");
+        while (!line.equals(EOM)) {
+            line = bufferedReader.readLine();
+            result.append(line).append(System.lineSeparator());
         }
         return result.toString();
     }
