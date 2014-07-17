@@ -11,7 +11,6 @@ public class EchoServer {
 
     public static void main(String[] args) throws IOException {
 
-        int portNumber = 1436;
 
         // try (ServerSocket serverSocket = new ServerSocket(portNumber);
         // Socket clientSocket = serverSocket.accept();
@@ -30,6 +29,7 @@ public class EchoServer {
         // System.out.println(e.getMessage());
         // }
         // }
+		int portNumber = 1436;
         try (ServerSocket serverSocket = new ServerSocket(portNumber);
                 Socket clientSocket = serverSocket.accept();
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
