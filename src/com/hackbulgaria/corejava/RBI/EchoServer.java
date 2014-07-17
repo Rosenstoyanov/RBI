@@ -21,7 +21,12 @@ public class EchoServer {
 						clientSocket.getInputStream()));) {
 			String inputLine;
 			while ((inputLine = in.readLine()) != null) {
-				out.println(inputLine);
+				// out.println(inputLine);
+				System.out.println(inputLine);
+				BufferedReader br = new BufferedReader(new InputStreamReader(
+						System.in));
+				String s = br.readLine();
+				out.println(s);
 				// sys
 			}
 		} catch (IOException e) {
